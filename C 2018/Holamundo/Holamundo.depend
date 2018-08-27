@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1535388611 source:c:\users\alan_\desktop\c2018-master\c 2018\holamundo\main.c
+	<stdio.h>
+	<stdlib.h>
+
