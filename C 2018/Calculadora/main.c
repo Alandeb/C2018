@@ -9,17 +9,15 @@ float suma(float , float);
 float resta(float , float);
 float producto(float , float);
 float dividir(float, float);
-long factorial(long);
+unsigned long factorial(long);
 char menuDos(float,float);
 
 int main()
 {
-    int opcion,banderaUno=0,banderaDos=0;
+    int opcion,banderaUno=0,banderaDos=0,banderaTres=0;
     char opcionCalcular;
-    float numeroUno,numeroDos,resSuma,resResta,resProducto,resDividir;
-    long resFactorialA,resFactorialB;
-    numeroUno=0;
-    numeroDos=0;
+    float numeroUno=0,numeroDos=0,resSuma,resResta,resProducto,resDividir;
+    unsigned long resFactorialA,resFactorialB;
     do{
         system("cls");
         opcion=menu(numeroUno,numeroDos);
@@ -70,12 +68,8 @@ int main()
                                 if(numeroDos>=1){
                                     resFactorialB=factorial(numeroDos);
                                     break;
-                                }else{
-                                    system("cls");
-                                    printf("No es posible hacer el factorial de cero o un numero negativo");
-                                    getch();
-                                    break;
                                 }
+                                break;
                             case 'g':
                                 resSuma=suma(numeroUno,numeroDos);
                                 resResta=resta(numeroUno,numeroDos);
@@ -96,24 +90,27 @@ int main()
                             default:
                                 break;
                         }
+                        banderaTres=1;
+                        break;
             case 4:
                 system("cls");
+                if(banderaTres==1){
                 switch(opcionCalcular){
                     case 'a':
-                        printf("La suma es %.2f",resSuma);
+                        printf("La suma de %.2f y %.2f es igual a %.2f",numeroUno,numeroDos,resSuma);
                         getch();
                         break;
                     case 'b':
-                        printf("La resta es %.2f",resResta);
+                        printf("La resta de %.2f y %.2f es igual a %.2f",numeroUno,numeroDos,resResta);
                         getch();
                         break;
                     case 'c':
-                        printf("El producto es %.2f",resProducto);
+                        printf("El producto de %.2f y %.2f es igual a  %.2f",numeroUno,numeroDos,resProducto);
                         getch();
                         break;
                     case 'd':
                         if(numeroDos!=0){
-                            printf("La division es %.2f",resDividir);
+                            printf("La division de %.2f y %.2f es igua a %.2f",numeroUno,numeroDos,resDividir);
                             getch();
                             break;
                         }else{
@@ -124,7 +121,8 @@ int main()
                          }
                     case 'e':
                          if(numeroUno>=1){
-                                printf("El numero factorial de %.0f es %ld",numeroUno,resFactorialA);
+                                printf("El numero factorial de %.0f es %li",numeroUno,resFactorialA);
+                                getch();
                                 break;
                             }else{
                                 printf("No es posible hacer el factorial de cero o un numero negativo");
@@ -133,13 +131,35 @@ int main()
                             }
                     case 'f':
                         if(numeroDos>=1){
-                                printf("El numero factorial de %.0f es %ld",numeroDos,resFactorialB);
+                                printf("El numero factorial de %.0f es %li",numeroDos,resFactorialB);
+                                getch();
                                 break;
                             }else{
                                 printf("No es posible hacer el factorial de cero o un numero negativo");
                                 getch();
                                 break;
                             }
+                    case 'g':
+                        printf("La suma de %.2f y %.2f es igual a %.2f",numeroUno,numeroDos,resSuma);
+                        printf("\nLa resta de %.2f y %.2f es igual a %.2f",numeroUno,numeroDos,resResta);
+                        printf("\nEl producto de %.2f y %.2f es igual a  %.2f",numeroUno,numeroDos,resProducto);
+                        if(numeroDos!=0){
+                            printf("\nLa division de %.2f y %.2f es igua a %.2f",numeroUno,numeroDos,resDividir);
+                        }else{
+                            printf("\nNo es posible dividir por cero ");
+                        }
+                        if(numeroUno>=1){
+                                printf("\nEl numero factorial de %.0f es %li",numeroUno,resFactorialA);
+                        }else{
+                                printf("\nNo es posible hacer el factorial de cero o un numero negativo");
+                        }
+                        if(numeroDos>=1){
+                                printf("\nEl numero factorial de %.0f es %li",numeroDos,resFactorialB);
+                        }else{
+                                printf("\nNo es posible hacer el factorial de cero o un numero negativo");
+                        }
+                        getch();
+                        break;
                     default:
                         break;
                 }
@@ -147,6 +167,9 @@ int main()
                 numeroDos=0;
                 banderaUno=0;
                 banderaDos=0;
+                banderaTres=0;
+                }
+
                 break;
             case 5:
                 system("cls");
@@ -184,6 +207,7 @@ int menu(float numeroUno,float numeroDos){
 }
 char menuDos(float numeroUno,float numeroDos){
         char opcion;
+        system("cls");
         printf("Calculos");
         printf("\n\nA) Suma de %.2f+%.2f",numeroUno,numeroDos);
         printf("\nB) Resta de %.2f-%.2f",numeroUno,numeroDos);
@@ -193,7 +217,7 @@ char menuDos(float numeroUno,float numeroDos){
         printf("\nF) Factorial de %.0f!",numeroDos);
         printf("\nG) Hacer todos los calculos");
         printf("\n\n Seleccione opcion: ");
-        scanf("%c",&opcion);
+        scanf("%s",&opcion);
         return opcion;
 }
 float suma(float numeroUno, float numeroDos){
@@ -216,8 +240,8 @@ float dividir(float numeroUno, float numeroDos){
     resultado=numeroUno/numeroDos;
     return resultado;
 }
-long factorial(long numero){
-      long numeFact ,fact = 1;
+unsigned long factorial(long numero){
+      unsigned long numeFact ,fact = 1;
       for (numeFact = numero; numeFact > 1; numeFact--){
             fact *=  numeFact;
        }
