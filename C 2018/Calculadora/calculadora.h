@@ -7,7 +7,7 @@ float suma(float , float);
 float resta(float , float);
 float producto(float , float);
 float dividir(float, float);
-unsigned long factorial(long);
+int factorial(int);
 char menuDos(float,float);
 
 #endif

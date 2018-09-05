@@ -1,13 +1,23 @@
-
+/**
+ * \brief Solicita un número al usuario
+ * \param operando Se carga el numero ingresado
+ * \return Retorna el valor cargado
+ *
+ */
 float ingreseNumero(float operando){
           system("cls");
-          printf("Coloque un numero o 'esc' para cancelar ");
+          printf("Coloque un numero: ");
           scanf("%f",&operando);
           return operando;
 }
 
-
-
+/**
+ * \brief Solicita un número al usuario del menu
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna opcion numero que pide el menu
+ *
+ */
 
 int menu(float numeroUno,float numeroDos){
         int opcion;
@@ -22,6 +32,13 @@ int menu(float numeroUno,float numeroDos){
         return opcion;
 
 }
+/**
+ * \brief Solicita un caracter al usuario del menu
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna opcion caracter que pide el menu
+ *
+ */
 char menuDos(float numeroUno,float numeroDos){
         char opcion;
         system("cls");
@@ -39,28 +56,62 @@ char menuDos(float numeroUno,float numeroDos){
         opcion = getche();
         return opcion;
 }
+/**
+ * \brief Solicita un número al usuario
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna resultado de la suma de los numeros
+ *
+ */
 float suma(float numeroUno, float numeroDos){
     float resultado;
     resultado=numeroUno+numeroDos;
     return resultado;
 }
+/**
+ * \brief Solicita un número al usuario
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna resultado de la resta de los numeros
+ *
+ */
 float resta(float numeroUno, float numeroDos){
     float resultado;
     resultado=numeroUno-numeroDos;
     return resultado;
 }
+/**
+ * \brief Solicita un número al usuario
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna resultado del producto de los numeros
+ *
+ */
 float producto(float numeroUno, float numeroDos){
     float resultado;
     resultado=numeroUno*numeroDos;
     return resultado;
 }
+/**
+ * \brief Solicita un número al usuario
+ * \param numeroUno primer numero para mostrar en el sistema
+ * \param numeroDos segundo numero para mostrar en el sistema
+ * \return Retorna resultado la division  de los numeros
+ *
+ */
 float dividir(float numeroUno, float numeroDos){
     float resultado;
     resultado=numeroUno/numeroDos;
     return resultado;
 }
-unsigned long factorial(long numero){
-      unsigned long numeFact ,fact = 1;
+/**
+ * \brief Solicita un número al usuario
+ * \param numero  para poder igualarlo a otra variable
+ * \return Retorna fact resultado del factorial
+ *
+ */
+int factorial(int numero){
+      int numeFact ,fact = 1;
       for (numeFact = numero; numeFact > 1; numeFact--){
             fact *=  numeFact;
        }

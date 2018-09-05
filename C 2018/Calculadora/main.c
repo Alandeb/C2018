@@ -6,10 +6,10 @@
 
 int main()
 {
-    int opcion,banderaUno=0,banderaDos=0,banderaTres=0;
+    int opcion,banderaUno=0,banderaDos=0,banderaTres=0,resFactorialA,resFactorialB;
     char opcionCalcular;
     float numeroUno=0,numeroDos=0,resSuma,resResta,resProducto,resDividir;
-    unsigned long resFactorialA,resFactorialB;
+
     do{
         system("cls");
         opcion=menu(numeroUno,numeroDos);
@@ -80,6 +80,9 @@ int main()
                                 getch();
                                 break;
                             default:
+                                system("cls");
+                                printf("Tecla incorrecta ");
+                                getch();
                                 break;
                         }
                         banderaTres=1;
@@ -113,7 +116,7 @@ int main()
                          }
                     case 'e':
                          if(numeroUno>=1){
-                                printf("El numero factorial de %.0f es %li",numeroUno,resFactorialA);
+                                printf("El numero factorial de %.0f es %d",numeroUno,resFactorialA);
                                 getch();
                                 break;
                             }else{
@@ -123,7 +126,7 @@ int main()
                             }
                     case 'f':
                         if(numeroDos>=1){
-                                printf("El numero factorial de %.0f es %li",numeroDos,resFactorialB);
+                                printf("El numero factorial de %.0f es %d",numeroDos,resFactorialB);
                                 getch();
                                 break;
                             }else{
@@ -141,12 +144,12 @@ int main()
                             printf("\nNo es posible dividir por cero ");
                         }
                         if(numeroUno>=1){
-                                printf("\nEl numero factorial de %.0f es %li",numeroUno,resFactorialA);
+                                printf("\nEl numero factorial de %.0f es %d",numeroUno,resFactorialA);
                         }else{
                                 printf("\nNo es posible hacer el factorial de cero o un numero negativo");
                         }
                         if(numeroDos>=1){
-                                printf("\nEl numero factorial de %.0f es %li",numeroDos,resFactorialB);
+                                printf("\nEl numero factorial de %.0f es %d",numeroDos,resFactorialB);
                         }else{
                                 printf("\nNo es posible hacer el factorial de cero o un numero negativo");
                         }
