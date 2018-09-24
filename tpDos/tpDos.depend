@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1537808909 source:c:\users\alan_\desktop\programacion\c2018-master\c 2018\tpdos\utn_abm.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"utn_abm.h"
+
+1537808964 source:c:\users\alan_\desktop\programacion\c2018-master\c 2018\tpdos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"utn_abm.h"
+
+1537807093 c:\users\alan_\desktop\programacion\c2018-master\c 2018\tpdos\utn_abm.h
+
