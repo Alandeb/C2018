@@ -5,23 +5,23 @@
 #include <ctype.h>
 #include <time.h>
 #include "utn_abm.h"
-static int getInt(int* pBuffer)
+int getInt(int* pBuffer)
 {
     fflush(stdin);
     return scanf("%d",pBuffer);
 }
-static int getFloat(float* pBuffer)
+int getFloat(float* pBuffer)
 {
     fflush(stdin);
     return scanf("%f",pBuffer);
 }
-static void getString(char msg[],char* pBuffer)
+void getString(char msg[],char* pBuffer)
 {
     printf("%s",msg);
     fflush(stdin);
     gets(pBuffer);//lo intente con fgets pero no podia tomar el dato lo siento
 }
-static int getCaracter(char* pBuffer)
+int getCaracter(char* pBuffer)
 {
     fflush(stdin);
     return scanf("%c",pBuffer);
@@ -47,8 +47,8 @@ int menu(){
         system("cls");
         printf("\tMENU");
         printf("\n\n1. Alta de personal ");
-        printf("\n2. Baja de personal ");
-        printf("\n3. Modificacion");
+        printf("\n2. Modificacion");
+        printf("\n3. Baja de personal ");
         printf("\n4. Informacion del personal ");
         printf("\n5. Salir");
         printf("\n\n Seleccione opcion: ");
@@ -78,10 +78,10 @@ int addEmployee(Employee empleado[],int cantidad)
             }while(i!=cantidad);
             empleado[index].id=idAux;
             printf("ID aleatoria: %d",empleado[index].id);
-            valSec=utn_getEntero(&empleado[index].sector,"\nIngrese el sector: ","ERROR!!, Reingrese el sector: ",1,25);
-            valSal=utn_getFloat(&empleado[index].salary,"Salario: ","ERROR!!, Reingrese el salario: ",1);
             valApe=getStringLetras("Ingrese el apellido: ","ERROR!! reingrese apellido: ",apellidoaux);
             valNom=getStringLetras("Ingrese el nombre: ","ERROR!! reingrese nombre: ",nombreaux);
+            valSec=utn_getEntero(&empleado[index].sector,"\nIngrese el sector: ","ERROR!!, Reingrese el sector: ",1,25);
+            valSal=utn_getFloat(&empleado[index].salary,"Salario: ","ERROR!!, Reingrese el salario: ",1);
             for(i=0;i<51;i++){
                 nombreaux[i]=tolower(nombreaux[i]);
                 apellidoaux[i]=tolower(apellidoaux[i]);
@@ -92,7 +92,7 @@ int addEmployee(Employee empleado[],int cantidad)
                 system("cls");
                 printf("\nID: %d",empleado[index].id);
                 printf("\tNombre: %s , %s",empleado[index].lastName,empleado[index].name);
-                printf("\tSector: %d",empleado[index].sector);
+                printf("\tSector: S0%d",empleado[index].sector);
                 printf("\tSalario: %.2f",empleado[index].salary);
                 utn_getCaracter(&salida,"\n\nSi los datos son correctos preciones 'S' o 'N' para re ingresarlos: ","ERROR incorrecto precione S o N ",'s','n');
             }
@@ -103,6 +103,13 @@ int addEmployee(Employee empleado[],int cantidad)
 
     return retorno;
 }
+int removeEmployee(Employee* empleado, int cantidad, int id)
+{
+    int i,retorno;
+
+ return retorno;
+}
+
 int obtenerEspacioLibre(Employee perso[] , int cantidad){
     int i, retorno;
     for (i=0;i<cantidad;i++){
@@ -231,8 +238,6 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr,char letraUno,char
 }
 int getNumeroAleatorio(int desde , int hasta)
 {
-    int aleatorio;
-    aleatorio=desde + rand() % (hasta +1-desde);
     //srand(time(NULL));
-    return aleatorio;
+    return desde + (rand() % (hasta +1-desde));
 }

@@ -8,7 +8,7 @@
 int main()
 {
     Employee empleado[personal];
-    int opcion,alta;
+    int opcion,alta,flag=0,auxId;
     init(empleado,personal);
     do
     {
@@ -17,13 +17,22 @@ int main()
         {
             case 1:
                 alta=addEmployee(empleado,personal);
+                if(alta==0)
+                    flag=1;
                 break;
             case 2:
-                if(alta==0){
+                if(flag=1){
 
                 }
                 break;
             case 3:
+                if(flag=1)
+                {
+                     printf("\tBAJA\n\n");
+                     printf("Coloque el ID que desea aliminar: ");
+                     getInt(&auxId);
+                     removeEmployee(empleado,personal,auxId);
+                }
                 break;
             case 4:
                 break;

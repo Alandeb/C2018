@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1537970635 source:c:\users\alan_\desktop\programacion\c2018-master\c 2018\ramdon\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
