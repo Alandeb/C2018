@@ -12,7 +12,11 @@ typedef struct
 }Employee;
 void init(Employee perso[],int cantidad);
 int addEmployee(Employee empleado[],int cantidad);
-int removeEmployee(Employee* empleado, int cantidad, int id);
+void printEmployee(Employee* empleado,int i);
+int findEmployeeById(Employee* empleado, int cantidad,int id);
+void modificationEmployee(Employee* empleado,int posID);
+void removeEmployee(Employee* empleado,int posID);
+int validRamdonNumber(Employee empleado[],int cantidad);
 int getNumeroAleatorio(int desde , int hasta);
 int obtenerEspacioLibre(Employee perso[] , int cantidad);
 int esSoloLetras(char str[]);

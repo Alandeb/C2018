@@ -19,7 +19,9 @@ void getString(char msg[],char* pBuffer)
 {
     printf("%s",msg);
     fflush(stdin);
-    gets(pBuffer);//lo intente con fgets pero no podia tomar el dato lo siento
+    fgets(pBuffer, 51 , stdin);
+    pBuffer[strcspn(pBuffer, "\n")] = 0;
+    //gets(pBuffer);//lo intente con fgets pero no podia tomar el dato lo siento
 }
 int getCaracter(char* pBuffer)
 {
@@ -59,8 +61,8 @@ int menu(){
 }
 int addEmployee(Employee empleado[],int cantidad)
 {
-    int index,valSal,retorno=-1,valSec,valNom,valApe,i,idAux;
-    char nombreaux[51],apellidoaux[51];
+    int index,valSal,retorno=-1,valSec,valNom,valApe,i;
+    char nombreAux[51],apellidoAux[51];
     char salida;
     index=obtenerEspacioLibre(empleado,cantidad);
     srand(time(NULL));
@@ -69,32 +71,22 @@ int addEmployee(Employee empleado[],int cantidad)
         do{
             system("cls");
             printf("\tALTA\n\n");
-            do{
-                idAux=getNumeroAleatorio(1000,10000);
-                for (i=0;i<cantidad;i++){
-                    if(empleado[i].id==idAux)
-                        break;
-                }
-            }while(i!=cantidad);
-            empleado[index].id=idAux;
-            printf("ID aleatoria: %d",empleado[index].id);
-            valApe=getStringLetras("Ingrese el apellido: ","ERROR!! reingrese apellido: ",apellidoaux);
-            valNom=getStringLetras("Ingrese el nombre: ","ERROR!! reingrese nombre: ",nombreaux);
-            valSec=utn_getEntero(&empleado[index].sector,"\nIngrese el sector: ","ERROR!!, Reingrese el sector: ",1,25);
-            valSal=utn_getFloat(&empleado[index].salary,"Salario: ","ERROR!!, Reingrese el salario: ",1);
+            empleado[index].id=validRamdonNumber(empleado,cantidad);
+            printf("ID aleatoria: %d\n",empleado[index].id);
+            valApe=getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
+            valNom=getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
+            valSec=utn_getEntero(&empleado[index].sector,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            valSal=utn_getFloat(&empleado[index].salary,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
             for(i=0;i<51;i++){
-                nombreaux[i]=tolower(nombreaux[i]);
-                apellidoaux[i]=tolower(apellidoaux[i]);
+                nombreAux[i]=tolower(nombreAux[i]);
+                apellidoAux[i]=tolower(apellidoAux[i]);
             }
-            strcpy(empleado[index].name,nombreaux);
-            strcpy(empleado[index].lastName,apellidoaux);
+            strcpy(empleado[index].name,nombreAux);
+            strcpy(empleado[index].lastName,apellidoAux);
             if(valApe==0&&valSec==0&&valSal==0&&valNom==0){
                 system("cls");
-                printf("\nID: %d",empleado[index].id);
-                printf("\tNombre: %s , %s",empleado[index].lastName,empleado[index].name);
-                printf("\tSector: S0%d",empleado[index].sector);
-                printf("\tSalario: %.2f",empleado[index].salary);
-                utn_getCaracter(&salida,"\n\nSi los datos son correctos preciones 'S' o 'N' para re ingresarlos: ","ERROR incorrecto precione S o N ",'s','n');
+                printEmployee(empleado,index);
+                utn_getCaracter(&salida,"\n\nSi los datos son correctos preciones 'S' o 'N' para re ingresarlos: ","ERROR tecla incorrecta precione S o N: ",'s','n');
             }
         }while(salida!='s');
         empleado[index].isEmpty=0;
@@ -103,11 +95,67 @@ int addEmployee(Employee empleado[],int cantidad)
 
     return retorno;
 }
-int removeEmployee(Employee* empleado, int cantidad, int id)
+void printEmployee(Employee* empleado,int i)
 {
-    int i,retorno;
-
- return retorno;
+    printf("\nID: %d",empleado[i].id);
+    printf("\tSector: S0%d",empleado[i].sector);
+    printf("\tNombre: %s, %s",empleado[i].lastName,empleado[i].name);
+    printf("\tSalario: %.2f$",empleado[i].salary);
+}
+int findEmployeeById(Employee* empleado, int cantidad,int id)
+{
+    int i;
+    for(i=0;i<cantidad;i++){
+        if(id==empleado[i].id && empleado[i].isEmpty==0)
+        {
+            printf("\nEmpleado encontrado... \n\n");
+            printEmployee(empleado, i);
+            return i;
+        }
+    }
+    printf("Empleado no encontrado...\n\n ");
+    return -1;
+}
+void modificationEmployee(Employee* empleado,int posID)
+{
+    char apellidoAux[51],nombreAux[51];
+    char salida;
+    int i;
+    printf("ID : %d\n",empleado[posID].id);
+    getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
+    getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
+    utn_getEntero(&empleado[posID].sector,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+    utn_getFloat(&empleado[posID].salary,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
+    for(i=0;i<51;i++){
+        nombreAux[i]=tolower(nombreAux[i]);
+        apellidoAux[i]=tolower(apellidoAux[i]);
+    }
+    strcpy(empleado[posID].name,nombreAux);
+    strcpy(empleado[posID].lastName,apellidoAux);
+    utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+    if(salida=='s'){
+        system("cls");
+        printf("Archivo modificado...\n\n");
+        system("pause");
+    }else{
+        printf("Volviendo al menu...\n\n");
+        system("pause");
+    }
+}
+void removeEmployee(Employee* empleado,int posID)
+{
+    char salida;
+    utn_getCaracter(&salida,"\n\nDesea eliminar el archivo del empleado S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+    if(salida=='s'){
+        system("cls");
+        printf("El empleado ha sido eliminado...\n\n");
+        system("pause");
+        empleado[posID].id=0;
+        empleado[posID].isEmpty=1;
+      }else{
+        printf("Volviendo al menu...\n\n");
+        system("pause");
+    }
 }
 
 int obtenerEspacioLibre(Employee perso[] , int cantidad){
@@ -236,8 +284,22 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr,char letraUno,char
     }
     return retorno;
 }
+int validRamdonNumber(Employee empleado[],int cantidad)
+{
+    int i,idAux;
+     do{
+            idAux=getNumeroAleatorio(1000,10000);
+            for (i=0;i<cantidad;i++){
+                if(empleado[i].id==idAux)
+                  return -1;
+
+                }
+        }while(i!=cantidad);
+    return idAux;
+}
 int getNumeroAleatorio(int desde , int hasta)
 {
     //srand(time(NULL));
     return desde + (rand() % (hasta +1-desde));
 }
+

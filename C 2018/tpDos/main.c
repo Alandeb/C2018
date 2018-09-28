@@ -8,7 +8,7 @@
 int main()
 {
     Employee empleado[personal];
-    int opcion,alta,flag=0,auxId;
+    int opcion,alta,flag=0,auxId,valID=-1,posicionID=-1;
     init(empleado,personal);
     do
     {
@@ -21,17 +21,33 @@ int main()
                     flag=1;
                 break;
             case 2:
-                if(flag=1){
-
+                if(flag==1){
+                    printf("\tMODIFICACIONES\n\n");
+                    valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea modificar: ","ERROR el id es numerico entre 1000 a 10000: ",1000,10000);
+                    if(valID==0)
+                    {
+                        posicionID=findEmployeeById(empleado,personal,auxId);
+                        if(posicionID!=-1){
+                            modificationEmployee(empleado,posicionID);
+                            break;
+                        }
+                    }
                 }
                 break;
             case 3:
-                if(flag=1)
+                if(flag==1)
                 {
+                     system("cls");
                      printf("\tBAJA\n\n");
-                     printf("Coloque el ID que desea aliminar: ");
-                     getInt(&auxId);
-                     removeEmployee(empleado,personal,auxId);
+                     valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea remover: ","ERROR el id es numerico entre 1000 a 10000: ",1000,10000);
+                     if(valID==0)
+                     {
+                         posicionID=findEmployeeById(empleado,personal,auxId);
+                            if(posicionID!=-1){
+                                removeEmployee(empleado,posicionID);
+                                break;
+                            }
+                     }
                 }
                 break;
             case 4:
