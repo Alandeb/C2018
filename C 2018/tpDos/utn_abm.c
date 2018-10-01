@@ -156,7 +156,8 @@ int findEmployeeById(Employee* empleado, int cantidad,int id)
             return i;
         }
     }
-    printf("Empleado no encontrado...\n\n ");
+    printf("Empleado no encontrado...\n\n");
+    system("pause");
     return -1;
 }
 /** \brief modifica al empleado buscado primero preguntando que datos quiere cambiar o si desea salir
@@ -392,6 +393,8 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
                     break;
                 }
             }
+            if(bufferInt==0)
+                break;
             else
             {
                 fflush(stdin);//limpia en linux como fflush

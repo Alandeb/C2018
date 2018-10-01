@@ -25,7 +25,7 @@ int main()
                 if(flag==1){
                     system("cls");
                     printf("\tMODIFICACIONES\n\n");
-                    valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea modificar: ","ERROR el id es numerico entre 1000 a 10000 o incorrecto: ",1000,10000);
+                    valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea modificar(si preciona 0 regresa al menu): ","ERROR el id es numerico entre 1000 a 10000 o incorrecto (si preciona 0 regresa al menu): ",1000,10000);
                     if(valID==0)
                     {
                         posicionID=findEmployeeById(empleado,personal,auxId);
@@ -45,7 +45,7 @@ int main()
                 {
                      system("cls");
                      printf("\tBAJA\n\n");
-                     valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea remover: ","ERROR el id es numerico entre 1000 a 10000: ",1000,10000);
+                     valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea remover(si preciona 0 regresa al menu): ","ERROR el id es numerico entre 1000 a 10000 o incorrecto (si preciona 0 regresa al menu): ",1000,10000);
                      if(valID==0)
                      {
                          posicionID=findEmployeeById(empleado,personal,auxId);
