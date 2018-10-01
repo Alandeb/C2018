@@ -81,6 +81,8 @@ int menu(){
     printf("\n4. Informacion del personal ");
     printf("\n5. Salir");
     utn_getEntero(&opcion,"\n\n Seleccione opcion: ","\nOpcion incorrecta es entre 1 y 5: ",1,5);
+    while(opcion==0)
+        utn_getEntero(&opcion,"\nOpcion incorrecta es entre 1 y 5: ","\nOpcion incorrecta es entre 1 y 5: ",1,5);
     return opcion;
 }
 /** \brief agrega a la lista de empleados employee los datos coloca la bandera IsEmpty en 0
@@ -104,7 +106,10 @@ int addEmployee(Employee empleado[],int cantidad)
             printf("ID aleatoria: %d\n",empleado[index].id);
             valApe=getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
             valNom=getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
-            valSec=utn_getEntero(&empleado[index].sector,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            valSec=utn_getEntero(&empleado[index].sector,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector(1 a 25): ",1,25);
+            while(empleado[index].sector==0){
+                valSec=utn_getEntero(&empleado[index].sector,"ERROR!!, Reingrese el sector (1 a 25): ","ERROR!!, Reingrese el sector(1 a 25): ",1,25);
+            }
             valSal=utn_getFloat(&empleado[index].salary,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
             for(i=0;i<51;i++){
                 nombreAux[i]=tolower(nombreAux[i]);
@@ -183,7 +188,9 @@ void modificationEmployee(Employee* empleado,int posID)
     printf("4. Salario\n");
     printf("5. Todas las opciones\n");
     printf("6. Salir");
-    utn_getEntero(&opcion,"\n\nSeleccione una opcion: ","\n\nERROR Seleccione una opcion valida: ",1,6);
+    utn_getEntero(&opcion,"\n\nSeleccione una opcion: ","\nERROR Seleccione una opcion valida: ",1,6);
+    while(opcion==0)
+        utn_getEntero(&opcion,"\nERROR Seleccione una opcion valida: ","\nERROR Seleccione una opcion valida: ",1,6);
     switch(opcion){
         case 1:
             getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
@@ -215,7 +222,11 @@ void modificationEmployee(Employee* empleado,int posID)
             }
             break;
         case 3:
-            utn_getEntero(&sectorAux,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            utn_getEntero(&sectorAux,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector(1 a 25): ",1,25);
+            while(sectorAux==0){
+                utn_getEntero(&sectorAux,"ERROR!!, Reingrese el sector(1 a 25): ","ERROR!!, Reingrese el sector(1 a 25): ",1,25);
+            }
+            utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
             if(salida=='s'){
                 system("cls");
                 printf("Archivo modificado...\n\n");
@@ -238,6 +249,9 @@ void modificationEmployee(Employee* empleado,int posID)
             getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
             getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
             utn_getEntero(&sectorAux,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            while(sectorAux==0){
+                utn_getEntero(&sectorAux,"ERROR!!, Reingrese el sector(1 a 25): ","ERROR!!, Reingrese el sector(1 a 25): ",1,25);
+            }
             utn_getFloat(&salaryAux,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
             for(i=0;i<51;i++){
                 nombreAux[i]=tolower(nombreAux[i]);

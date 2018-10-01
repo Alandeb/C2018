@@ -23,17 +23,20 @@ int main()
                 break;
             case 2:
                 if(flag==1){
-                    system("cls");
-                    printf("\tMODIFICACIONES\n\n");
-                    valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea modificar(si preciona 0 regresa al menu): ","ERROR el id es numerico entre 1000 a 10000 o incorrecto (si preciona 0 regresa al menu): ",1000,10000);
-                    if(valID==0)
-                    {
-                        posicionID=findEmployeeById(empleado,personal,auxId);
-                        if(posicionID!=-1){
-                            modificationEmployee(empleado,posicionID);
+                    do{
+                        system("cls");
+                        printf("\tMODIFICACIONES\n\n");
+                        valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea modificar,o ingrese 0 para volver al menu principal: ","ID incorrecto. Ingrese un id del 1000 al 10000 o 0 para salir: ",1000,10000);
+                        if(valID==0)
+                        {
+                            posicionID=findEmployeeById(empleado,personal,auxId);
+                            if(posicionID!=-1){
+                                modificationEmployee(empleado,posicionID);
+                                break;
+                            }
+                        }else
                             break;
-                        }
-                    }
+                    }while(posicionID==-1);
                 }else{
                     system("cls");
                     printf("aun no ingreso ningun empleado\n");
@@ -43,17 +46,20 @@ int main()
             case 3:
                 if(flag==1)
                 {
-                     system("cls");
-                     printf("\tBAJA\n\n");
-                     valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea remover(si preciona 0 regresa al menu): ","ERROR el id es numerico entre 1000 a 10000 o incorrecto (si preciona 0 regresa al menu): ",1000,10000);
-                     if(valID==0)
-                     {
-                         posicionID=findEmployeeById(empleado,personal,auxId);
-                            if(posicionID!=-1){
-                                removeEmployee(empleado,posicionID);
-                                break;
-                            }
-                     }
+                    do{
+                        system("cls");
+                        printf("\tBAJA\n\n");
+                        valID=utn_getEntero(&auxId,"Ingrese ID del empleado que desea remover,o ingrese 0 para volver al menu principal: ","ID incorrecto. Ingrese un id del 1000 al 10000 o 0 para salir",1000,10000);
+                        if(valID==0)
+                        {
+                            posicionID=findEmployeeById(empleado,personal,auxId);
+                                if(posicionID!=-1){
+                                    removeEmployee(empleado,posicionID);
+                                    break;
+                                }
+                        }else
+                            break;
+                    }while(posicionID==-1);
                 }else{
                     system("cls");
                     printf("aun no ingreso ningun empleado\n");
