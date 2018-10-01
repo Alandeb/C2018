@@ -5,16 +5,35 @@
 #include <ctype.h>
 #include <time.h>
 #include "utn_abm.h"
+/**
+ * \brief escanea un entero y lo guarda en un puntero
+ * \param pBuffer puntero donde se va a guardar el dato
+ * \return Retorna true o false dependiendo si scan consigue un dato
+ *
+ */
 int getInt(int* pBuffer)
 {
     fflush(stdin);
     return scanf("%d",pBuffer);
 }
+/**
+ * \brief escanea un flotante y lo guarda en un puntero
+ * \param pBuffer puntero donde se va a guardar el dato
+ * \return Retorna true o false dependiendo si scan consigue un dato
+ *
+ */
 int getFloat(float* pBuffer)
 {
     fflush(stdin);
     return scanf("%f",pBuffer);
 }
+/**
+ * \brief escanea un caracter y lo guarda en un puntero
+ * \param msg Mensaje a ser mostrado
+ * \param pBuffer puntero donde se va a guardar el dato
+ * \return Retorna true o false dependiendo si scan consigue un dato
+ *
+ */
 void getString(char msg[],char* pBuffer)
 {
     printf("%s",msg);
@@ -23,42 +42,52 @@ void getString(char msg[],char* pBuffer)
     pBuffer[strcspn(pBuffer, "\n")] = 0;
     //gets(pBuffer);//lo intente con fgets pero no podia tomar el dato lo siento
 }
+/**
+ * \brief escanea un caracter y lo guarda en un puntero
+ * \param pBuffer puntero donde se va a guardar el dato
+ * \return Retorna true o false dependiendo si scan consigue un dato
+ *
+ */
 int getCaracter(char* pBuffer)
 {
     fflush(stdin);
     return scanf("%c",pBuffer);
 }
+/** \brief indica que todas las posiciones del array estan
+ *  habilitadas poniendo todas las banderas(isEmpty) en 1 o true
+ * \param Employee empleado Lista,estructura del sistema de empleado
+ * \param cantidad de veces que debe interar
+ * \return no retorna nada es vacio
+ */
 
-void init(Employee* perso,int cantidad){
+void init(Employee* empleado,int cantidad){
     int i;
     for (i=0;i<cantidad;i++){
-        perso[i].isEmpty=1;
+        empleado[i].isEmpty=1;
     }
 }
+/**
+ * \brief Solicita un número al usuario para lograr alguna opcion
+ * \return Retorna opcion numero que pide el menu
+ *
+ */
 int menu(){
-    int opcion,flag=0;
-    do{
-        if(flag==1)
-        {
-            system("cls");
-            fflush(stdin);
-            printf("ERROR OPCION INCORRECTA");
-            getch();
-        }else
-            flag=1;
-        system("cls");
-        printf("\tMENU");
-        printf("\n\n1. Alta de personal ");
-        printf("\n2. Modificacion");
-        printf("\n3. Baja de personal ");
-        printf("\n4. Informacion del personal ");
-        printf("\n5. Salir");
-        printf("\n\n Seleccione opcion: ");
-        getInt(&opcion);
-
-    }while(opcion<1 || opcion>5);
+    int opcion;
+    system("cls");
+    printf("\tMENU");
+    printf("\n\n1. Alta de personal ");
+    printf("\n2. Modificacion");
+    printf("\n3. Baja de personal ");
+    printf("\n4. Informacion del personal ");
+    printf("\n5. Salir");
+    utn_getEntero(&opcion,"\n\n Seleccione opcion: ","\nOpcion incorrecta es entre 1 y 5: ",1,5);
     return opcion;
 }
+/** \brief agrega a la lista de empleados employee los datos coloca la bandera IsEmpty en 0
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \return Retorna (-1) si es error o 0 si fue correcta la carga
+*/
 int addEmployee(Employee empleado[],int cantidad)
 {
     int index,valSal,retorno=-1,valSec,valNom,valApe,i;
@@ -94,14 +123,28 @@ int addEmployee(Employee empleado[],int cantidad)
     }
 
     return retorno;
+
 }
+/** \brief imprime todos los datos de los empleados cada vez que se solicita
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param i Numero de posicion del empleado que se desea imprimir
+* \return np retorno ningun valor
+*
+*/
 void printEmployee(Employee* empleado,int i)
 {
     printf("\nID: %d",empleado[i].id);
     printf("\tSector: S0%d",empleado[i].sector);
-    printf("\tNombre: %s, %s",empleado[i].lastName,empleado[i].name);
-    printf("\tSalario: %.2f$",empleado[i].salary);
+    printf("\tNombre:%s, %s",empleado[i].lastName,empleado[i].name);
+    printf("\t\tSalario: $%.2f\n",empleado[i].salary);
 }
+/** \brief busca al empleado por el id en la estructura Employee
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \param id Numero del empleado buscado
+* \return Retorna -1 si no encontro al empleado su no retorna la posicion del empleado buscado
+*
+*/
 int findEmployeeById(Employee* empleado, int cantidad,int id)
 {
     int i;
@@ -109,42 +152,130 @@ int findEmployeeById(Employee* empleado, int cantidad,int id)
         if(id==empleado[i].id && empleado[i].isEmpty==0)
         {
             printf("\nEmpleado encontrado... \n\n");
-            printEmployee(empleado, i);
+            system("pause");
             return i;
         }
     }
     printf("Empleado no encontrado...\n\n ");
     return -1;
 }
+/** \brief modifica al empleado buscado primero preguntando que datos quiere cambiar o si desea salir
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param posID Numero del empleado que se desea modificar
+* \return np retorno ningun valor
+*
+*/
 void modificationEmployee(Employee* empleado,int posID)
 {
     char apellidoAux[51],nombreAux[51];
     char salida;
-    int i;
-    printf("ID : %d\n",empleado[posID].id);
-    getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
-    getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
-    utn_getEntero(&empleado[posID].sector,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
-    utn_getFloat(&empleado[posID].salary,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
-    for(i=0;i<51;i++){
-        nombreAux[i]=tolower(nombreAux[i]);
-        apellidoAux[i]=tolower(apellidoAux[i]);
+    float salaryAux;
+    int i,opcion,sectorAux;
+    do{
+    system("cls");
+    printf("DATOS DEL EMPLEADO \n");
+    printEmployee(empleado, posID);
+    printf("\nQUE DESEA MODIFICAR");
+    printf("\n\n1. Apellido \n");
+    printf("2. Nombre\n");
+    printf("3. Sector\n");
+    printf("4. Salario\n");
+    printf("5. Todas las opciones\n");
+    printf("6. Salir");
+    utn_getEntero(&opcion,"\n\nSeleccione una opcion: ","\n\nERROR Seleccione una opcion valida: ",1,6);
+    switch(opcion){
+        case 1:
+            getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
+            for(i=0;i<51;i++){
+                apellidoAux[i]=tolower(apellidoAux[i]);
+            }
+            utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+            if(salida=='s'){
+                system("cls");
+                printf("Archivo modificado...\n\n");
+                system("pause");
+                strcpy(empleado[posID].lastName,apellidoAux);
+                break;
+            }
+            break;
+        case 2:
+            getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
+            for(i=0;i<51;i++){
+                nombreAux[i]=tolower(nombreAux[i]);
+                apellidoAux[i]=tolower(apellidoAux[i]);
+            }
+            utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+            if(salida=='s'){
+                system("cls");
+                printf("Archivo modificado...\n\n");
+                system("pause");
+                strcpy(empleado[posID].name,nombreAux);
+                break;
+            }
+            break;
+        case 3:
+            utn_getEntero(&sectorAux,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            if(salida=='s'){
+                system("cls");
+                printf("Archivo modificado...\n\n");
+                system("pause");
+                empleado[posID].sector=sectorAux;
+                break;
+            }
+            break;
+        case 4:
+            utn_getFloat(&salaryAux,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
+            utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+            if(salida=='s'){
+                system("cls");
+                printf("Archivo modificado...\n\n");
+                system("pause");
+                empleado[posID].salary=salaryAux;
+                break;
+            }
+        case 5:
+            getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
+            getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
+            utn_getEntero(&sectorAux,"Ingrese sector (1 a 25): ","ERROR!!, Reingrese el sector: ",1,25);
+            utn_getFloat(&salaryAux,"Ingrese salario: ","ERROR!!, Reingrese el salario: ",1);
+            for(i=0;i<51;i++){
+                nombreAux[i]=tolower(nombreAux[i]);
+                apellidoAux[i]=tolower(apellidoAux[i]);
+            }
+            utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+            if(salida=='s'){
+                system("cls");
+                printf("Archivo modificado...\n\n");
+                system("pause");
+                empleado[posID].sector=sectorAux;
+                empleado[posID].salary=salaryAux;
+                strcpy(empleado[posID].name,nombreAux);
+                strcpy(empleado[posID].lastName,apellidoAux);
+                break;
+            }
+            break;
+        case 6:
+            system("cls");
+            printf("Volviendo al menu principal...\n");
+            system("pause");
+            break;
+        default:
+            break;
     }
-    strcpy(empleado[posID].name,nombreAux);
-    strcpy(empleado[posID].lastName,apellidoAux);
-    utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
-    if(salida=='s'){
-        system("cls");
-        printf("Archivo modificado...\n\n");
-        system("pause");
-    }else{
-        printf("Volviendo al menu...\n\n");
-        system("pause");
-    }
+    }while(opcion !=6 );
 }
+/** \brief Remueve al empleado buscado por el id pone la bandera isEmpty en 1
+*
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \param posID numero exacto donde se encuantra el dato buscado
+* \return no retorna ningun valor
+*
+*/
 void removeEmployee(Employee* empleado,int posID)
 {
     char salida;
+    printEmployee(empleado, posID);
     utn_getCaracter(&salida,"\n\nDesea eliminar el archivo del empleado S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
     if(salida=='s'){
         system("cls");
@@ -157,15 +288,20 @@ void removeEmployee(Employee* empleado,int posID)
         system("pause");
     }
 }
-
-int obtenerEspacioLibre(Employee perso[] , int cantidad){
+/** \brief Obtiene el espacio libre en la que la bandera isEmplty esta
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \return Retorna la posicion en la que hay espacio libres
+*
+*/
+int obtenerEspacioLibre(Employee empleado[] , int cantidad){
     int i, retorno;
     for (i=0;i<cantidad;i++){
-        if(perso[i].isEmpty==1){
+        if(empleado[i].isEmpty==1){
             retorno=i;
             break;
         }
-        else{
+        if(i==cantidad){
             system("cls");
             retorno=-1;
             printf("Limite de registro alcanzado ");
@@ -175,21 +311,32 @@ int obtenerEspacioLibre(Employee perso[] , int cantidad){
     }
     return retorno;
 }
-
+/**
+ * \brief Solicita un flotante  al usuario ,lo valida  y lo devuelve
+ * \param msg Es el mensaje a ser mostrado
+ * \param msgErr Es el mensaje a ser mostrado si falla el primer ingreso
+ * \param pFlotante Puntero donde se guardara el dato ingresado
+ * \param min Minimo del numero entero que necesito como condicion
+ * \return 0 si el enterp que ingresaron esta entre los numeros de condicion
+ */
 int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min)
 {
     int retorno=-1;
     float bufferFloat;
+    char bufferFloatString[256];
     if(pFlotante != NULL && msg != NULL && msgErr != NULL&& min >= 1)
     {
         do
         {
-            printf("%s",msg);
-            if( (getFloat(&bufferFloat) == 1) &&(bufferFloat >= min))
+            getString(msg,bufferFloatString);
+            if( esNumerico(bufferFloatString))
             {
-                *pFlotante = bufferFloat;
-                retorno = 0;
-                break;
+                bufferFloat = atof (bufferFloatString);
+                if(bufferFloat >= min){
+                    *pFlotante = bufferFloat;
+                    retorno = 0;
+                    break;
+                }
             }
             else
             {
@@ -200,22 +347,50 @@ int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min)
     }
     return retorno;
 }
-
-
+/**
+ * \brief Verifica si el valor recibido es numérico
+ * \param str Array con la cadena a ser analizada
+ * \return 1 si es númerico y 0 si no lo es
+ *
+ */
+int esNumerico(char str[])
+{
+   int i=0;
+   while(str[i] != '\0')
+   {
+       if((str[i] < '0' || str[i] > '9')&&(str[i]!='.')&&(str[i]!=','))
+           return 0;
+       i++;
+   }
+   return 1;
+}
+/**
+ * \brief Solicita un entero al usuario ,lo valida  y lo devuelve
+ * \param msg Es el mensaje a ser mostrado
+ * \param msgErr Es el mensaje a ser mostrado si falla el primer ingreso
+ * \param pEntero Puntero donde se guardara el dato ingresado
+ * \param min Minimo del numero entero que necesito como condicion
+ * \param max Maximo del numero entero que necesito como segunda condicion
+ * \return 0 si el entero que ingresaron esta entre los numeros de condicion
+ */
 int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
 {
     int retorno=-1;
     int bufferInt;
+    char bufferIntString[256];
     if(pEntero != NULL && msg != NULL && msgErr != NULL&& min <= max)
     {
         do
         {
-            printf("%s",msg);
-            if( (getInt(&bufferInt) == 1) &&(bufferInt >= min && bufferInt <= max))
+            getString(msg,bufferIntString);
+            if( esNumerico(bufferIntString))
             {
-                *pEntero = bufferInt;
-                retorno = 0;
-                break;
+                bufferInt = atoi(bufferIntString);
+                if((bufferInt >= min && bufferInt <= max)){
+                    *pEntero = bufferInt;
+                    retorno = 0;
+                    break;
+                }
             }
             else
             {
@@ -227,6 +402,12 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
     }
     return retorno;
 }
+/**
+ * \brief Verifica si el valor recibido contiene solo letras
+ * \param str Array con la cadena a ser analizada
+ * \return 1 si contiene solo ' ' y letras y 0 si no lo es
+ *
+ */
 int esSoloLetras(char str[])
 {
    int i=0;
@@ -238,7 +419,13 @@ int esSoloLetras(char str[])
    }
    return 1;
 }
-
+/**
+ * \brief Solicita un texto al usuario y lo devuelve
+ * \param msg Es el mensaje a ser mostrado
+ * \param msgErr Es el mensaje a ser mostrado si falla el primer ingreso
+ * \param pBuffer Array donde se cargará el texto ingresado
+ * \return 0 si el texto contiene solo letras
+ */
 int getStringLetras(char* msg,char* msgErr,char* pBuffer)
 {
     char aux[51];
@@ -255,6 +442,15 @@ int getStringLetras(char* msg,char* msgErr,char* pBuffer)
     }while(retorno!=0);
     return retorno;
 }
+/**
+ * \brief Solicita un caracter al usuario ,lo valida  y lo devuelve
+ * \param msg Es el mensaje a ser mostrado
+ * \param msgErr Es el mensaje a ser mostrado si falla el primer ingreso
+ * \param pCaracter char donde se cargará el texto ingresado
+ * \param letraUno caracter que necesito como condicion
+ * \param letraDos caracter que necesito como segunda condicion
+ * \return 0 si el caracter que ingresaron en igual al que se colo como condicion
+ */
 int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr,char letraUno,char letraDos)
 
 {
@@ -284,6 +480,11 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr,char letraUno,char
     }
     return retorno;
 }
+/** \brief valida el numero ramdon y lo pide
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \return Retorna idAux numero id si no esta repetido
+*/
 int validRamdonNumber(Employee empleado[],int cantidad)
 {
     int i,idAux;
@@ -291,12 +492,97 @@ int validRamdonNumber(Employee empleado[],int cantidad)
             idAux=getNumeroAleatorio(1000,10000);
             for (i=0;i<cantidad;i++){
                 if(empleado[i].id==idAux)
-                  return -1;
-
+                  break;
                 }
         }while(i!=cantidad);
     return idAux;
 }
+/**
+ * \brief Solicita un número al usuario para lograr alguna opcion
+ * \return Retorna opcion numero que pide el menu
+ *
+ */
+int menuDos(){
+    int opcion=0;
+    system("cls");
+    printf("\tLISTADO\n\n");
+    printf("1. Listado de empleados.\n");
+    printf("2. Total y promedio de los salarios\n");
+    printf("3. Volver a atras");
+    utn_getEntero(&opcion,"\n\n Seleccione opcion: ","\nOpcion incorrecta es entre 1 y 3: ",1,3);
+    return opcion;
+}
+/** \brief Acomoda el array de empleados el order indica si de mayor a menor
+*           o de menor a mayor
+* \param Employee empleado Lista , estructra del sistema de empleados
+* \param cantidad Total de base de datos del sistema
+* \param order [1] indica de mayor a menor  - [0] indica de menor a mayor
+* \return ino retorna ningun valor
+*
+*/
+void sortEmployees(Employee empleado[], int cantidad ,int order){
+    Employee empAux;
+    int i,j;
+    if(order==0){
+        for(i=0;i<cantidad-1;i++){
+            for(j=i+1;j<cantidad;j++){
+                if(empleado[i].sector>empleado[j].sector){
+                    empAux=empleado[i];
+                    empleado[i]=empleado[j];
+                    empleado[j]=empAux;
+                }else
+                    if(empleado[i].sector==empleado[j].sector){
+                        if((stricmp(empleado[i].lastName,empleado[j].lastName))>0){
+                            empAux=empleado[i];
+                            empleado[i]=empleado[j];
+                            empleado[j]=empAux;
+                        }
+                }else
+                    if((stricmp(empleado[i].lastName,empleado[j].lastName))==0){
+                        if((stricmp(empleado[i].name,empleado[j].name))>0){
+                            empAux=empleado[i];
+                            empleado[i]=empleado[j];
+                            empleado[j]=empAux;
+                        }
+                    }
+
+
+            }
+        }
+    }else{
+        for(i=0;i<cantidad-1;i++){
+            for(j=i+1;j<cantidad;j++){
+                if(empleado[i].id<empleado[j].id){
+                    empAux=empleado[i];
+                    empleado[i]=empleado[j];
+                    empleado[j]=empAux;
+                }else
+                    if(empleado[i].id==empleado[j].id){
+                        if((stricmp(empleado[i].lastName,empleado[j].lastName))<0){
+                            empAux=empleado[i];
+                            empleado[i]=empleado[j];
+                            empleado[j]=empAux;
+                        }
+                }else
+                    if((stricmp(empleado[i].lastName,empleado[j].lastName))==0){
+                        if((stricmp(empleado[i].name,empleado[j].name))<0){
+                            empAux=empleado[i];
+                            empleado[i]=empleado[j];
+                            empleado[j]=empAux;
+                        }
+                    }
+
+            }
+        }
+    }
+}
+/**
+ * \brief Genera un número aleatorio
+ * \param desde Número aleatorio mínimo
+ * \param hasta Número aleatorio máximo
+ * \return retorna el número aleatorio generado
+ *
+ */
 int getNumeroAleatorio(int desde , int hasta)
 {
     //srand(time(NULL));
