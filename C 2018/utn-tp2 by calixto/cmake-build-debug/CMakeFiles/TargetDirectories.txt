@@ -1,0 +1,3 @@
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/cmake-build-debug/CMakeFiles/utn_tp2.dir
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

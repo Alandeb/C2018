@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1537224109 source:d:\cajiao macarena\tp2utn\functions-in-c\functionsbiblo\functionsforprojects.c
+	<stdio.h>
+	<stdlib.h>
+	"functionsForProjects.h"
+
+1537223777 d:\cajiao macarena\tp2utn\functions-in-c\functionsbiblo\functionsforprojects.h
+
+1537311946 source:d:\cajiao macarena\tp2utn\main.c
+	<stdio.h>
+	<stdlib.h>
+	".\\functions-in-C\\functionsBiblo\\functionsForProjects.h"
+
+1537223777 d:\cajiao macarena\tp2utn\\functions-in-c\\functionsbiblo\\functionsforprojects.h
+

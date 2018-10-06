@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1536090088 source:c:\users\alan_\desktop\programacion\c2018-master\c 2018\variable local global\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/functionsForProjects.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+ctype.h
+-
+functionsForProjects.h
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/functionsForProjects.h
+
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/functionsForProjects.h
+
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/main.c
+stdio.h
+-
+stdlib.h
+-
+functionsForProjects.h
+C:/Users/yasir/Desktop/Proyectos UTN/utn-tp2/functionsForProjects.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+
