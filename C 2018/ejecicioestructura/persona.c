@@ -15,15 +15,16 @@ void persona_alta(ePersona perso[], int cantidad){
     int index;
     index=obtenerEspacioLibre(perso ,cantidad);
     if(index!=-1){
-        utn_getFloat(&perso[index].DNI,"\nIngrese D.N.I: ","\nERROR!!, Reingrese el D.N.I: ",1,99999999);
+        //utn_getFloat(&perso[index].DNI,"\nIngrese D.N.I: ","\nERROR!!, Reingrese el D.N.I: ",1,99999999);
 
-        //printf("ingrese nombre: ");
+        printf("ingrese nombre: ");
+        fgets(perso[index].nombre,sizeof(perso[index].nombre)-2,stdin);
        // getString(&perso[index].nombre);
 
         //fflush(stdin);
         //gets(perso[index].nombre);
-        printf("%s",perso[index].nombre);
-        getch();
+        //printf("%s",perso[index].nombre);
+        //getch();
 
 
     }

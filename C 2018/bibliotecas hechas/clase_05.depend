@@ -65,3 +65,16 @@
 	<stdlib.h>
 	"utn.h"
 
+1536699598 source:c:\users\alan_\desktop\c2018-master\c2018-master\c 2018\bibliotecas hechas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536699598 c:\users\alan_\desktop\c2018-master\c2018-master\c 2018\bibliotecas hechas\utn.h
+
+1536699598 source:c:\users\alan_\desktop\c2018-master\c2018-master\c 2018\bibliotecas hechas\utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+

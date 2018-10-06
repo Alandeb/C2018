@@ -1,17 +1,16 @@
 # depslib dependency file v1.0
-1537385961 source:c:\users\alan_\desktop\c2018\ejecicioestructura\main.c
+1537764840 source:c:\users\alan_\desktop\c2018\ejecicioestructura\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 	"persona.h"
-	"get.h"
 
 1537509638 c:\users\alan_\desktop\c2018\ejecicioestructura\persona.h
 
 1537509638 c:\users\alan_\desktop\c2018\ejecicioestructura\get.h
 
-1537509754 source:c:\users\alan_\desktop\c2018\ejecicioestructura\persona.c
+1537764797 source:c:\users\alan_\desktop\c2018\ejecicioestructura\persona.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>

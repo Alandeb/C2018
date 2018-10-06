@@ -14,7 +14,7 @@ static char getCaracter(char* pBuffer)
 {
     return scanf("%c",pBuffer);
 }
-int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min, int max)
+/*int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min, int max)
 {
 
     int retorno=-1;
@@ -45,7 +45,7 @@ int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min, int max)
 }
 
 
-/*int utn_getEntero(  int* pEntero, char* msg,
+int utn_getEntero(  int* pEntero, char* msg,
                     char* msgErr,int min, int max)
 
 {
@@ -80,12 +80,11 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr)
 {
     int retorno=-1;
     char bufferChar;
-    if( msg != NULL && msgErr != NULL
-        && (letraUno>=0||letraUno<=255)&& (letraDos>=0||letraDos<=255) && reintentos >= 0)
+    if( msg != NULL && msgErr != NULL)
     {
         do
         {
-            reintentos--;
+
             fflush(stdin);
             printf("%s",msg);
             if( (getCaracter(&bufferChar) == 1) &&
@@ -100,7 +99,7 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr)
             {
                msg=msgErr;
             }
-        }while(retorno);
+        }while(retorno!=0);
 
     }
     return retorno;

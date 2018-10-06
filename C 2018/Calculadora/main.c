@@ -29,7 +29,18 @@ int main()
                         opcionCalcular=menuDos(numeroUno,numeroDos);
                 }else{
                     system("cls");
-                    printf("Le falta algun numero ");
+                    if (banderaUno==0&&banderaDos==1){
+                        printf("le falta operando 1");
+                        getch();
+                        break;
+                    }
+                    if(banderaDos==0&&banderaUno==1){
+                        printf("le falta operando 2");
+                        getch();
+                        break;
+                    }
+
+                    printf("Le falta ambos operandos ");
                     getch();
                     break;
                 }
@@ -85,6 +96,9 @@ int main()
                                 getch();
                                 break;
                         }
+                        system("cls");
+                        printf("Operaciones hechas precione la opcion 4 para visualisar los resultados\n");
+                        system("pause");
                         banderaTres=1;
                         break;
             case 4:
@@ -163,6 +177,12 @@ int main()
                 banderaUno=0;
                 banderaDos=0;
                 banderaTres=0;
+                }else{
+                    system("cls");
+                    printf("Elija algun calculo en la opcion 3\n");
+                    system("pause");
+                    break;
+
                 }
 
                 break;

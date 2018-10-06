@@ -3,7 +3,7 @@
 #include <string.h>
 #include <conio.h>
 #include "persona.h"
-#include "get.h"
+//#include "get.h"
 #define cant 200
 /*
 1) Realizar una agenda para guardar los datos de hasta 200 personas de las cuales se toman los siguientes datos:
@@ -23,16 +23,7 @@ int main()
     ePersona per[cant];
     init (per, cant);
     do{
-        system("cls");
-        printf("MENU");
-        printf("\n\n1. alta de persona ");
-        printf("\n2. Baja de persona");
-        printf("\n3. Modificacion");
-        printf("\n4. Listado de personas ");
-        printf("\n5. Salir");
-        printf("\n\n Seleccione opcion: ");
-        scanf("%d",&opcion);
-        switch(opcion){
+
             case 1:
                 persona_alta(per,cant);
                 break;

@@ -15,7 +15,7 @@ float ingreseNumero(float operando){
  * \brief Solicita un número al usuario del menu
  * \param numeroUno primer numero para mostrar en el sistema
  * \param numeroDos segundo numero para mostrar en el sistema
- * \return Retorna opcion numero que pide el menu
+ * \return Retorna valor que pide el menu
  *
  */
 
@@ -60,7 +60,7 @@ char menuDos(float numeroUno,float numeroDos){
  * \brief Solicita un número al usuario
  * \param numeroUno primer numero para mostrar en el sistema
  * \param numeroDos segundo numero para mostrar en el sistema
- * \return Retorna resultado de la suma de los numeros
+ * \return Retorna el valor de la suma de los numeros
  *
  */
 float suma(float numeroUno, float numeroDos){
@@ -72,7 +72,7 @@ float suma(float numeroUno, float numeroDos){
  * \brief Solicita un número al usuario
  * \param numeroUno primer numero para mostrar en el sistema
  * \param numeroDos segundo numero para mostrar en el sistema
- * \return Retorna resultado de la resta de los numeros
+ * \return Retorna el valor de la resta de los numeros
  *
  */
 float resta(float numeroUno, float numeroDos){
@@ -84,7 +84,7 @@ float resta(float numeroUno, float numeroDos){
  * \brief Solicita un número al usuario
  * \param numeroUno primer numero para mostrar en el sistema
  * \param numeroDos segundo numero para mostrar en el sistema
- * \return Retorna resultado del producto de los numeros
+ * \return Retorna el valor del producto de los numeros
  *
  */
 float producto(float numeroUno, float numeroDos){
@@ -96,7 +96,7 @@ float producto(float numeroUno, float numeroDos){
  * \brief Solicita un número al usuario
  * \param numeroUno primer numero para mostrar en el sistema
  * \param numeroDos segundo numero para mostrar en el sistema
- * \return Retorna resultado la division  de los numeros
+ * \return Retorna el valor de la division  de los numeros
  *
  */
 float dividir(float numeroUno, float numeroDos){
@@ -107,7 +107,7 @@ float dividir(float numeroUno, float numeroDos){
 /**
  * \brief Solicita un número al usuario
  * \param numero  para poder igualarlo a otra variable
- * \return Retorna fact resultado del factorial
+ * \return Retorna un valor de la multiplicacion de un numero anterior por el anterior del mismo numero y los acumula
  *
  */
 int factorial(int numero){
