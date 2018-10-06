@@ -55,7 +55,7 @@
 	<time.h>
 	"utn_abm.h"
 
-1538425755 source:c:\users\alumno\downloads\tp_laboratorio_1-master\tpdos-abm\main.c
+1538425530 source:d:\tpdos-abm\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -64,29 +64,9 @@
 	<ctype.h>
 	"utn_abm.h"
 
-1538425755 c:\users\alumno\downloads\tp_laboratorio_1-master\tpdos-abm\utn_abm.h
+1538385148 d:\tpdos-abm\utn_abm.h
 
-1538425755 source:c:\users\alumno\downloads\tp_laboratorio_1-master\tpdos-abm\utn_abm.c
-	<stdio.h>
-	<stdlib.h>
-	<conio.h>
-	<string.h>
-	<ctype.h>
-	<time.h>
-	"utn_abm.h"
-
-1538428664 source:c:\users\alan_\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tpdos-abm\main.c
-	<stdio.h>
-	<stdlib.h>
-	<conio.h>
-	<string.h>
-	<time.h>
-	<ctype.h>
-	"utn_abm.h"
-
-1538428664 c:\users\alan_\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tpdos-abm\utn_abm.h
-
-1538428664 source:c:\users\alan_\desktop\tp_laboratorio_1-master\tp_laboratorio_1-master\tpdos-abm\utn_abm.c
+1538425364 source:d:\tpdos-abm\utn_abm.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>

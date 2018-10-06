@@ -85,7 +85,7 @@ int menu(){
         utn_getEntero(&opcion,"\nOpcion incorrecta es entre 1 y 5: ","\nOpcion incorrecta es entre 1 y 5: ",1,5);
     return opcion;
 }
-/**\brief agrega a la lista de empleados employee los datos coloca la bandera IsEmpty en 0
+/** \brief agrega a la lista de empleados employee los datos coloca la bandera IsEmpty en 0
 * \param Employee empleado Lista , estructra del sistema de empleados
 * \param cantidad Total de base de datos del sistema
 * \return Retorna (-1) si es error o 0 si fue correcta la carga
@@ -159,7 +159,6 @@ int findEmployeeById(Employee* empleado, int cantidad,int id)
             printf("\nEmpleado encontrado... \n\n");
             system("pause");
             return i;
-
         }
     }
     printf("Empleado no encontrado...\n\n");
@@ -428,21 +427,14 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
  */
 int esSoloLetras(char str[])
 {
-    int i=0;
-    int retorno = 1;
-    if(str[i] == '\0')
-        retorno = 0;
-    else{
-        while(str[i] != '\0')
-        {
-            if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')){
-                retorno = 0;
-                break;
-            }
-            i++;
-        }
-    }
-    return retorno;
+   int i=0;
+   while(str[i] != '\0')
+   {
+       if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+           return 0;
+       i++;
+   }
+   return 1;
 }
 /**
  * \brief Solicita un texto al usuario y lo devuelve
