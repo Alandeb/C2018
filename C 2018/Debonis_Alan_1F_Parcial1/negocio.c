@@ -59,8 +59,9 @@ int menu()
     printf("4- Alta de juegos\n");
     printf("5- Modificacion y Baja de juegos\n");
     printf("6- Listado de juegos\n");
-    printf("7- Salir\n");
-    utn_getEntero(&opcion,"\nIngrese opcion: ","\nERROR Ingrese opcion valida: ",1,7);
+    printf("7- Alquiler\n");
+    printf("8- Salir\n");
+    utn_getEntero(&opcion,"\nIngrese opcion: ","\nERROR Ingrese opcion valida: ",1,8);
     return opcion;
 }
 /**
@@ -123,7 +124,7 @@ void printUser(eCliente* user,int i)
 void menuDownModific(eCliente* user,int cantidad){
     int valID,auxId,posicionID,opcion,valOpcion;
     system("cls");
-    printf("\tMODIFICACIONES y BAJAS DE CLIENTES\n\n");
+    printf("***MODIFICACIONES y BAJAS DE CLIENTES***\n\n");
     printf("1- Modificaciones.\n");
     printf("2- Bajas.\n\n");
     valOpcion=utn_getEnteroEsc(&opcion,"Seleccione una opcion o 0 para volver al menu: ","ERROR Seleccione una opcion o 0 para volver al menu: ",1,2,0);
@@ -142,7 +143,7 @@ void menuDownModific(eCliente* user,int cantidad){
                     break;
             case 2:
                 system("cls");
-                printf("\tBAJA\n\n");
+                printf("\t***BAJA***\n\n");
                 valID=utn_getEnteroEsc(&auxId,"Ingrese Codigo del cliente que desea remover,o ingrese 0 para volver al menu principal: ","Codigo de cliente incorrecto. Ingrese un Codigo de cliente del 1000 al 10000 o 0 para salir",1,100,0);
                 if(valID==0)
                 {
@@ -352,7 +353,7 @@ void sortUser(eCliente* user, int cantidad ,int order){
 void menuDos(eCliente* user,int cantidad){
     int order=0,i;
     system("cls");
-    printf("\tLISTADO\n\n");
+    printf("***LISTADO***\n\n");
     printf("INGRESE EL CRITERIO DE ORDENAMIENTO  0(de menor a mayor) o 1 (de mayor a menor)  \n");
     utn_getEntero(&order,"\n\n Seleccione opcion: ","\nOpcion incorrecta es entre 0 y 1: ",0,1);
     system("cls");
@@ -381,7 +382,7 @@ int addGame(eJuego* game,int cantidad)
     {
         do{
             system("cls");
-            printf("\tALTA\n\n");
+            printf("***ALTA***\n\n");
             game[index].idJuego=index+1;
             printf("ID juego: %d\n",game[index].idJuego);
             valImp=utn_getFloat(&game[index].importe,"Ingrese importe: ","ERROR reingrese importe: ",1);
@@ -415,7 +416,7 @@ void printGame(eJuego* game,int i)
 * \param id Numero del juego buscado
 * \return Retorna -1 si no encontro al juego su no retorna la posicion del ckiente buscado
 */
-void menuDownModific2(eJuego* game,int cantidad){
+void menuDownModificGame(eJuego* game,int cantidad){
     int valID,auxId,posicionID,opcion,valOpcion;
     system("cls");
     printf("\tMODIFICACIONES y BAJAS DE juegoS\n\n");
@@ -437,7 +438,7 @@ void menuDownModific2(eJuego* game,int cantidad){
                     break;
             case 2:
                 system("cls");
-                printf("\tBAJA\n\n");
+                printf("***BAJA***\n\n");
                 valID=utn_getEnteroEsc(&auxId,"Ingrese ID del juego que desea remover,o ingrese 0 para volver al menu principal: ","ID incorrecto. Ingrese un id del 1 al 20 o 0 para salir",1,20,0);
                 if(valID==0)
                 {
@@ -569,20 +570,19 @@ void modificationGame(eJuego* game,int index)
 * \param order [1] indica de mayor a menor  - [0] indica de menor a mayor
 * \return ino retorna ningun valor
 */
-/*
 void sortGame(eJuego* game, int cantidad ,int order){
     eJuego gameAux;
     int i,j;
     if(order==0){
         for(i=0;i<cantidad-1;i++){
             for(j=i+1;j<cantidad;j++){
-                if((stricmp(game[i].apellido,game[j].apellido))>0){
+                if(game[i].importe>game[j].importe){
                     gameAux=game[i];
                     game[i]=game[j];
                     game[j]=gameAux;
                 }else
-                    if((stricmp(game[i].apellido,game[j].apellido))==0){
-                        if((stricmp(game[i].nombre,game[j].nombre))>0){
+                    if(game[i].importe==game[j].importe){
+                        if((stricmp(game[i].descripcion,game[j].descripcion))>0){
                             gameAux=game[i];
                             game[i]=game[j];
                             game[j]=gameAux;
@@ -593,13 +593,13 @@ void sortGame(eJuego* game, int cantidad ,int order){
     }else{
         for(i=0;i<cantidad-1;i++){
             for(j=i+1;j<cantidad;j++){
-                if((stricmp(game[i].apellido,game[j].apellido))<0){
+                if(game[i].importe<game[j].importe){
                     gameAux=game[i];
                     game[i]=game[j];
                     game[j]=gameAux;
                 }else
-                    if((stricmp(game[i].apellido,game[j].apellido))==0){
-                        if((stricmp(game[i].nombre,game[j].nombre))<0){
+                    if(game[i].importe==game[j].importe){
+                        if((stricmp(game[i].descripcion,game[j].descripcion))<0){
                             gameAux=game[i];
                             game[i]=game[j];
                             game[j]=gameAux;
@@ -608,15 +608,15 @@ void sortGame(eJuego* game, int cantidad ,int order){
             }
         }
     }
-}*/
+}
 void menuDosGame(eJuego* game,int cantidad){
     int order=0,i;
     system("cls");
-    printf("\tLISTADO\n\n");
+    printf("***LISTADO***\n\n");
     printf("INGRESE EL CRITERIO DE ORDENAMIENTO  0(de menor a mayor) o 1 (de mayor a menor)  \n");
     utn_getEntero(&order,"\n\n Seleccione opcion: ","\nOpcion incorrecta es entre 0 y 1: ",0,1);
     system("cls");
-    //sortGame(game,cantidad,order);
+    sortGame(game,cantidad,order);
     for(i=0;i<cantidad;i++){
         if(game[i].isEmpty==0){
             printGame(game,i);

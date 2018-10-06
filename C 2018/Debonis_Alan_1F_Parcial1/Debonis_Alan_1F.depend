@@ -58,7 +58,7 @@
 	"negocio.h"
 	"validaciones.h"
 
-1538714928 source:c:\users\alan_\desktop\debonis_alan_1f\validaciones.c
+1538801533 source:c:\users\alan_\desktop\debonis_alan_1f\validaciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -67,11 +67,11 @@
 	"negocio.h"
 	"validaciones.h"
 
-1538773325 c:\users\alan_\desktop\debonis_alan_1f\negocio.h
+1538801533 c:\users\alan_\desktop\debonis_alan_1f\negocio.h
 
 1538714458 c:\users\alan_\desktop\debonis_alan_1f\validaciones.h
 
-1538763542 source:c:\users\alan_\desktop\debonis_alan_1f\main.c
+1538802664 source:c:\users\alan_\desktop\debonis_alan_1f\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -79,7 +79,7 @@
 	"negocio.h"
 	"validaciones.h"
 
-1538773623 source:c:\users\alan_\desktop\debonis_alan_1f\negocio.c
+1538801533 source:c:\users\alan_\desktop\debonis_alan_1f\negocio.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

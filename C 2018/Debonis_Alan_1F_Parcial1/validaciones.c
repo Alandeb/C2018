@@ -32,7 +32,6 @@ int getFloat(float* pBuffer)
  * \param msg Mensaje a ser mostrado
  * \param pBuffer puntero donde se va a guardar el dato
  * \return Retorna true o false dependiendo si scan consigue un dato
- *
  */
 void getString(char msg[],char* pBuffer)
 {
@@ -46,7 +45,6 @@ void getString(char msg[],char* pBuffer)
  * \param msg Mensaje a ser mostrado
  * \param pBuffer puntero donde se va a guardar el dato
  * \return Retorna true o false dependiendo si scan consigue un dato
- *
  */
 void getString21(char msg[],char* pBuffer)
 {
@@ -59,7 +57,6 @@ void getString21(char msg[],char* pBuffer)
  * \brief escanea un caracter y lo guarda en un puntero
  * \param pBuffer puntero donde se va a guardar el dato
  * \return Retorna true o false dependiendo si scan consigue un dato
- *
  */
 int getCaracter(char* pBuffer)
 {
@@ -106,7 +103,6 @@ int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min)
  * \brief Verifica si el valor recibido es numérico flotante
  * \param str Array con la cadena a ser analizada
  * \return 1 si es númerico y 0 si no lo es
- *
  */
 int esNumericoFlotante(char str[])
 {
@@ -133,7 +129,6 @@ int esNumericoFlotante(char str[])
  * \brief Verifica si el valor recibido es numérico entero
  * \param str Array con la cadena a ser analizada
  * \return 1 si es númerico y 0 si no lo es
- *
  */
 int esNumerico(char str[])
 {
@@ -178,7 +173,7 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
             }
             else
             {
-                fflush(stdin);//limpia en linux como fflush
+                fflush(stdin);
                 msg=msgErr;
             }
         }while(retorno!=0);

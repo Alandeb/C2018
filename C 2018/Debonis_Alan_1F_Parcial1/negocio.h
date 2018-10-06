@@ -46,7 +46,7 @@ void menuDos(eCliente* user,int cantidad);
 int addGame(eJuego* game,int cantidad);
 void printGame(eJuego* game,int i);
 int findGameById(eJuego* game, int cantidad,int id);
-void menuDownModific2(eJuego* game,int cantidad);
+void menuDownModificGame(eJuego* game,int cantidad);
 void modificationGame(eJuego* game,int index);
 void removeGame(eJuego* game,int posID);
 void sortGame(eJuego* game, int cantidad ,int order);

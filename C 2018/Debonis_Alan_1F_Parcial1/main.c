@@ -11,7 +11,7 @@ int main()
 {
     eJuego game[cantGame];
     eCliente users[cantUser];
-    int opcion,flagUno=0,alta;
+    int opcion,flagUno=0,alta,altaDos,flagDos=0;
     init(users,cantUser,game,cantGame);
     do
     {
@@ -26,11 +26,10 @@ int main()
                 break;
             case 2:
                 if(flagUno==1){
-
                     menuDownModific(users,cantUser);
                 }else{
                     system("cls");
-                    printf("aun no ingreso ningun empleado\n");
+                    printf("Aun no ingreso ningun cliente\n");
                     system("pause");
                 }
                 break;
@@ -40,28 +39,40 @@ int main()
                     break;
                 }else{
                     system("cls");
-                    printf("aun no ingreso ningun empleado\n");
+                    printf("Aun no ingreso ningun cliente\n");
                     system("pause");
                 }
                 break;
-     /*     case 4:
-                mostrarEmpleados(lista, 10, sectores, 5);
+            case 4:
+                altaDos=addGame(game,cantGame);
                 system("pause");
-            break;
-        case 5:
-            listarEmpleadosXSector(lista, 10, sectores, 5);
-            system("pause");
-            break;
-        case 6:
-            ordenarXSectorYNombre(lista, 10, sectores, 5);
-            system("pause");
-            break;
-        case 7:
-            system("pause");
-            break;
-        */
+                if(altaDos==0&&flagDos==0)
+                    flagDos=1;
+                break;
+            case 5:
+                if(flagUno==1){
+                    menuDownModificGame(game,cantGame);
+                }else{
+                    system("cls");
+                    printf("Aun no ingreso ningun juego\n");
+                    system("pause");
+                }
+                break;
+            case 6:
+                if(flagUno==1){
+                    menuDosGame(game,cantGame);
+                }else{
+                    system("cls");
+                    printf("Aun no ingreso ningun juego\n");
+                    system("pause");
+                }
+                break;
+            case 7:
+                break;
+            case 8:
+                printf("HASTA LUEGO...\n");
+                break;
         }
-
-    }while(opcion!= 7);
+    }while(opcion!= 8);
     return 0;
 }
