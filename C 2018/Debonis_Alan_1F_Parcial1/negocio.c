@@ -12,7 +12,7 @@
  * \param cantidad de veces que debe interar
  * \return no retorna nada es vacio
  */
-void init(eCliente* user,int cantidad,eJuego* game,int cantJuego)
+void init(eCliente* user,int cantidad,eJuego* game,int cantJuego,eAlquileres* alquiler)
 {
     int i;
     for (i=0;i<cantidad;i++){
@@ -20,6 +20,9 @@ void init(eCliente* user,int cantidad,eJuego* game,int cantJuego)
     }
     for (i=0;i<cantJuego;i++){
         game[i].isEmpty=1;
+    }
+    for (i=0;i<cantidad*cantJuego;i++){
+        alquiler[i].isEmpty=1;
     }
 }
 /**
@@ -38,10 +41,32 @@ int obtenerEspacioLibre(eCliente user[] , int cantidad){
     }
     return retorno;
 }
+/**
+* \brief Obtiene el espacio libre en la que la bandera isEmplty esta
+* \param eCliente user Lista , estructra del sistema de clientes
+* \param cantidad Total de base de datos del sistema
+* \return Retorna la posicion en la que hay espacio libres
+*/
 int obtenerEspacioLibre2(eJuego game[] , int cantidad){
     int i, retorno=-1;
     for (i=0;i<cantidad;i++){
         if(game[i].isEmpty==1){
+            retorno=i;
+            break;
+        }
+    }
+    return retorno;
+}
+/**
+* \brief Obtiene el espacio libre en la que la bandera isEmplty esta
+* \param eCliente user Lista , estructra del sistema de clientes
+* \param cantidad Total de base de datos del sistema
+* \return Retorna la posicion en la que hay espacio libres
+*/
+int obtenerEspacioLibreAlquiler(eAlquileres* rent , int cantidad,int cantiGame){
+    int i, retorno=-1;
+    for (i=0;i<cantidad*cantiGame;i++){
+        if(rent[i].isEmpty==1){
             retorno=i;
             break;
         }
@@ -80,7 +105,7 @@ int addUser(eCliente* user,int cantidad)
     {
         do{
             system("cls");
-            printf("\tALTA\n\n");
+            printf("***ALTA***\n\n");
             user[index].idCliente=index+1;
             printf("Codigo de cliente: %d\n",user[index].idCliente);
             valApe=getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
@@ -88,8 +113,8 @@ int addUser(eCliente* user,int cantidad)
             valTel=getStringTelefono("Ingrese telefo: ","ERROR reingrese telefo: ",telAux);
             valDom=getStringAlfaNumerico("Ingrese Domicilio: ","ERROR Rengrese Domicilio: ",domAux);
             for(i=0;i<51;i++){
-                nombreAux[i]=tolower(nombreAux[i]);
-                apellidoAux[i]=tolower(apellidoAux[i]);
+                nombreAux[i]=toupper(nombreAux[i]);
+                apellidoAux[i]=toupper(apellidoAux[i]);
             }
                 strcpy(user[index].nombre,nombreAux);
                 strcpy(user[index].apellido,apellidoAux);
@@ -225,7 +250,7 @@ void modificationUser(eCliente* user,int index)
             case 1:
                 getStringLetras("Ingrese el apellido: ","ERROR solo debe poseer letras!! reingrese apellido: ",apellidoAux);
                 for(i=0;i<51;i++){
-                    apellidoAux[i]=tolower(apellidoAux[i]);
+                    apellidoAux[i]=toupper(apellidoAux[i]);
                 }
                 utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
                 if(salida=='s'){
@@ -239,7 +264,7 @@ void modificationUser(eCliente* user,int index)
             case 2:
                 getStringLetras("Ingrese el nombre: ","ERROR solo debe poseer letras!! reingrese nombre: ",nombreAux);
                 for(i=0;i<51;i++){
-                    nombreAux[i]=tolower(nombreAux[i]);
+                    nombreAux[i]=toupper(nombreAux[i]);
                 }
                 utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
                 if(salida=='s'){
@@ -277,8 +302,8 @@ void modificationUser(eCliente* user,int index)
                 getStringTelefono("Ingrese telefo: ","ERROR reingrese telefo: ",telAux);
                 getStringAlfaNumerico("Ingrese Domicilio: ","ERROR Ringrese Domicilio: ",domAux);
                 for(i=0;i<51;i++){
-                    nombreAux[i]=tolower(nombreAux[i]);
-                    apellidoAux[i]=tolower(apellidoAux[i]);
+                    nombreAux[i]=toupper(nombreAux[i]);
+                    apellidoAux[i]=toupper(apellidoAux[i]);
                 }
                 utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
                 if(salida=='s'){
@@ -385,10 +410,10 @@ int addGame(eJuego* game,int cantidad)
             printf("***ALTA***\n\n");
             game[index].idJuego=index+1;
             printf("ID juego: %d\n",game[index].idJuego);
-            valImp=utn_getFloat(&game[index].importe,"Ingrese importe: ","ERROR reingrese importe: ",1);
             valDes=getStringAlfaNumerico("Ingrese Descripcion: ","ERROR Rengrese Descripcion: ",desAux);
+            valImp=utn_getFloat(&game[index].importe,"Ingrese importe: ","ERROR reingrese importe: ",1);
             for(i=0;i<51;i++){
-                desAux[i]=tolower(desAux[i]);
+                desAux[i]=toupper(desAux[i]);
             }
             if(valImp==0&&valDes==0){
                 strcpy(game[index].descripcion,desAux);
@@ -540,7 +565,7 @@ void modificationGame(eJuego* game,int index)
                 utn_getFloat(&impAux,"Ingrese importe: ","ERROR reingrese importe: ",1);
                 getStringAlfaNumerico("Ingrese Descripcion: ","ERROR Rengrese Descripcion: ",desAux);
                 for(i=0;i<51;i++){
-                    desAux[i]=tolower(desAux[i]);
+                    desAux[i]=toupper(desAux[i]);
                 }
                 utn_getCaracter(&salida,"\n\nDesea realizar estas modificaciones S/N: ","ERROR tecla incorrecta precione S o N: ",'s','n');
                 if(salida=='s'){
@@ -624,4 +649,175 @@ void menuDosGame(eJuego* game,int cantidad){
     }
     printf("\n"),
     system("pause");
+}
+/**
+* \brief agrega a la lista declientes eClientes los datos coloca la bandera IsEmpty en 0
+* \param eCliente user Lista , estructra del sistema de clientes
+* \param cantidad Total de base de datos del sistema
+* \return Retorna (-1) si es error o 0 si fue correcta la carga
+*/
+
+void addRent(eAlquileres* rent,int cantidad,int cantiGame,eCliente* user,eJuego* game)
+{
+    int index;
+    char salida;
+    index=obtenerEspacioLibreAlquiler(rent,cantidad,cantiGame);
+    if(index!=-1)
+    {
+        do{
+            system("cls");
+            printf("***Alquileres***\n\n");
+            rent[index].idAlquier=index+1;
+            printf("Codigo de alquier: %d\n",rent[index].idAlquier);
+            rent[index].idCliente=selecUser(user,cantidad);
+            rent[index].idJuego=selecGame(game,cantiGame);
+            printf("Fecha\n");
+            GetDay(rent,index);
+            system("cls");
+            printRent(rent[index],game,user,cantidad,cantiGame);
+            utn_getCaracter(&salida,"\n\nSi los datos son correctos preciones 'S' o 'N' para re ingresarlos: ","ERROR tecla incorrecta precione S o N: ",'s','n');
+        }while(salida!='s');
+        rent[index].isEmpty=0;
+    }
+}
+void printRent(eAlquileres rent,eJuego* game,eCliente* user,int cantidad,int cantiGame)
+{
+    char descripcion[51],nombre[102];
+    cargarNombre(user,cantidad,rent.idCliente,nombre);
+    cargarDescripcion(game,cantiGame,rent.idJuego,descripcion);
+    printf("\nID alquiler: %d",rent.idAlquier);
+    printf("\tCliente: %s",nombre);
+    printf("\tJuegos: %s",descripcion);
+    printf("\tFecha: %d/%d/%d\n",rent.fecha.dia,rent.fecha.mes,rent.fecha.anio);
+}
+void sortGameRent(eJuego* game, int cantidad){
+    eJuego gameAux;
+    int i,j;
+    for(i=0;i<cantidad-1;i++){
+        for(j=i+1;j<cantidad;j++){
+            if(game[i].idJuego>game[j].idJuego){
+                gameAux=game[i];
+                game[i]=game[j];
+                game[j]=gameAux;
+            }
+        }
+    }
+}
+void sortUserRent(eCliente* user, int cantidad ){
+    eCliente userAux;
+    int i,j;
+    for(i=0;i<cantidad-1;i++){
+        for(j=i+1;j<cantidad;j++){
+            if(user[i].idCliente>user[j].idCliente){
+                userAux=user[i];
+                user[i]=user[j];
+                user[j]=userAux;
+            }
+        }
+    }
+}
+
+int selecUser(eCliente* user, int cantidad)
+{
+    int idUser;
+    int i;
+    sortUserRent(user,cantidad);
+    printf("\nClientes\n\n");
+    for(i=0; i < cantidad; i++)
+    {
+        if(user[i].isEmpty==0)
+        printf("%d %s %s\n", user[i].idCliente, user[i].nombre,user[i].apellido);
+    }
+    utn_getEntero(&idUser,"\nSeleccione id del cliente: ","ERROR seleccione id valido: ",1,cantidad);
+    for(i=0;i<cantidad;i++){
+        if(idUser==user[i].idCliente && user[i].isEmpty==0)
+        {
+            break;
+        }
+        if(i==cantidad-1){
+            printf("\nEl cliente no existe...");
+            utn_getEntero(&idUser,"\nSeleccione id del cliente: ","ERROR seleccione id valido: ",1,cantidad);
+            i=0;
+        }
+    }
+    return idUser;
+
+}
+void GetDay(eAlquileres* rent, int cantidad)
+{
+
+    utn_getEntero(&rent[cantidad].fecha.mes,"Mes del 1 al 12: ","ERROR Mes del 1 al 12: ",1,12);
+    switch(rent[cantidad].fecha.mes){
+        case 2:
+            utn_getEntero(&rent[cantidad].fecha.dia,"Dia del 1 al 28: ","ERROR Dia del 1 al 28: ",1,28);
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            utn_getEntero(&rent[cantidad].fecha.dia,"Dia del 1 al 30: ","ERROR Dia del 1 al 30: ",1,30);
+            break;
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            utn_getEntero(&rent[cantidad].fecha.dia,"Dia del 1 al 31: ","ERROR Dia del 1 al 31: ",1,31);
+            break;
+    }
+    utn_getEntero(&rent[cantidad].fecha.anio,"Anio del 2018 al 2030: ","ERROR Anio del 2018 al 2030: ",2018,2030);
+}
+int selecGame(eJuego* game, int cantidad)
+{
+    int idGame;
+    int i;
+    sortGameRent(game,cantidad);
+    printf("\nJuegos\n\n");
+    for(i=0; i < cantidad; i++)
+    {
+        if(game[i].isEmpty==0)
+        printf("%d %s \n", game[i].idJuego, game[i].descripcion);
+    }
+    utn_getEntero(&idGame,"\nSeleccione ID de juego: ","ERROR seleccione ID valido: ",1,cantidad);
+    for(i=0;i<cantidad;i++){
+        if(idGame==game[i].idJuego && game[i].isEmpty==0)
+        {
+            break;
+        }
+        if(i==cantidad-1){
+            printf("\nEl juego no existe...");
+            utn_getEntero(&idGame,"\nSeleccione ID de juego: ","ERROR seleccione ID valido: ",1,cantidad);
+            i=0;
+        }
+    }
+    return idGame;
+}
+void cargarNombre(eCliente user[], int cantidad, int idCliente, char cadena[])
+{
+    int i;
+
+    for(i=0; i < cantidad; i++)
+    {
+        if( user[i].idCliente == idCliente)
+        {
+            strcpy(cadena, user[i].nombre);
+            strcat(cadena," ");
+            strcat(cadena,user[i].apellido);
+            break;
+        }
+    }
+}
+void cargarDescripcion(eJuego game[], int cantidad, int idJuego, char cadena[])
+{
+    int i;
+    for(i=0; i < cantidad; i++)
+    {
+        if( game[i].idJuego == idJuego)
+        {
+            strcpy(cadena, game[i].descripcion);
+            break;
+        }
+    }
 }

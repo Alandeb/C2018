@@ -11,8 +11,9 @@ int main()
 {
     eJuego game[cantGame];
     eCliente users[cantUser];
+    eAlquileres alquiler[cantUser*cantGame];
     int opcion,flagUno=0,alta,altaDos,flagDos=0;
-    init(users,cantUser,game,cantGame);
+    init(users,cantUser,game,cantGame,alquiler);
     do
     {
         opcion=menu();
@@ -20,7 +21,6 @@ int main()
         {
             case 1:
                 alta=addUser(users,cantUser);
-                system("pause");
                 if(alta==0&&flagUno==0)
                     flagUno=1;
                 break;
@@ -45,7 +45,6 @@ int main()
                 break;
             case 4:
                 altaDos=addGame(game,cantGame);
-                system("pause");
                 if(altaDos==0&&flagDos==0)
                     flagDos=1;
                 break;
@@ -68,6 +67,15 @@ int main()
                 }
                 break;
             case 7:
+                if(flagUno==1&&flagDos==1)
+                {
+                    addRent(alquiler,cantUser,cantGame,users,game);
+                }
+                else{
+                    system("cls");
+                    printf("Faltan datos que ingresar\n");
+                    system("pause");
+                }
                 break;
             case 8:
                 printf("HASTA LUEGO...\n");

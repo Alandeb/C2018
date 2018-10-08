@@ -171,11 +171,8 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
                     break;
                 }
             }
-            else
-            {
-                fflush(stdin);
-                msg=msgErr;
-            }
+            fflush(stdin);
+            msg=msgErr;
         }while(retorno!=0);
 
     }
@@ -366,7 +363,7 @@ int esAlfaNumerico(char str[])
    }else{
         while(str[i] != '\0')
         {
-            if((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9'))
+            if((str[i]!=' ')&&(str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9'))
                 return 0;
             i++;
         }
