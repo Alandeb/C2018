@@ -32,7 +32,6 @@ int getFloat(float* pBuffer)
  * \param msg Mensaje a ser mostrado
  * \param pBuffer puntero donde se va a guardar el dato
  * \return Retorna true o false dependiendo si scan consigue un dato
- *
  */
 void getString(char msg[],char* pBuffer)
 {
@@ -40,13 +39,24 @@ void getString(char msg[],char* pBuffer)
     fflush(stdin);
     fgets(pBuffer, 51 , stdin);
     pBuffer[strcspn(pBuffer, "\n")] = 0;
-    //gets(pBuffer);lo intente con fgets pero no podia tomar el dato lo siento
+}
+/**
+ * \brief escanea un caracter y lo guarda en un puntero
+ * \param msg Mensaje a ser mostrado
+ * \param pBuffer puntero donde se va a guardar el dato
+ * \return Retorna true o false dependiendo si scan consigue un dato
+ */
+void getString21(char msg[],char* pBuffer)
+{
+    printf("%s",msg);
+    fflush(stdin);
+    fgets(pBuffer, 21 , stdin);
+    pBuffer[strcspn(pBuffer, "\n")] = 0;
 }
 /**
  * \brief escanea un caracter y lo guarda en un puntero
  * \param pBuffer puntero donde se va a guardar el dato
  * \return Retorna true o false dependiendo si scan consigue un dato
- *
  */
 int getCaracter(char* pBuffer)
 {
@@ -93,11 +103,12 @@ int utn_getFloat(float *pFlotante, char* msg ,char* msgErr,int min)
  * \brief Verifica si el valor recibido es numérico flotante
  * \param str Array con la cadena a ser analizada
  * \return 1 si es númerico y 0 si no lo es
- *
  */
 int esNumericoFlotante(char str[])
 {
    int i=0,flagcoma=0;
+   if(str[i] == '\0')
+        return  0;
    while(str[i] != '\0')
    {
        if(str[i] < '0' || str[i] > '9'){
@@ -118,11 +129,12 @@ int esNumericoFlotante(char str[])
  * \brief Verifica si el valor recibido es numérico entero
  * \param str Array con la cadena a ser analizada
  * \return 1 si es númerico y 0 si no lo es
- *
  */
 int esNumerico(char str[])
 {
    int i=0;
+   if(str[i] == '\0')
+        return 0;
    while(str[i] != '\0')
    {
        if(str[i] < '0' || str[i] > '9')
@@ -159,8 +171,43 @@ int utn_getEntero(  int* pEntero, char* msg,char* msgErr,int min, int max)
                     break;
                 }
             }
-            if(bufferInt==0)
-                break;
+            fflush(stdin);
+            msg=msgErr;
+        }while(retorno!=0);
+
+    }
+    return retorno;
+}
+/**
+ * \brief Solicita un entero al usuario ,lo valida  y lo devuelve
+ * \param msg Es el mensaje a ser mostrado
+ * \param msgErr Es el mensaje a ser mostrado si falla el primer ingreso
+ * \param pEntero Puntero donde se guardara el dato ingresado
+ * \param min Minimo del numero entero que necesito como condicion
+ * \param max Maximo del numero entero que necesito como segunda condicion
+ * \return 0 si el entero que ingresaron esta entre los numeros de condicion
+ */
+int utn_getEnteroEsc(  int* pEntero, char* msg,char* msgErr,int min, int max,int esc)
+{
+    int retorno=-1;
+    int bufferInt;
+    char bufferIntString[256];
+    if(pEntero != NULL && msg != NULL && msgErr != NULL&& min <= max)
+    {
+        do
+        {
+            getString(msg,bufferIntString);
+            if( esNumerico(bufferIntString))
+            {
+                bufferInt = atoi(bufferIntString);
+                if((bufferInt >= min && bufferInt <= max)){
+                    *pEntero = bufferInt;
+                    retorno = 0;
+                    break;
+                }
+                if(bufferInt==esc)
+                    break;
+            }
             else
             {
                 fflush(stdin);//limpia en linux como fflush
@@ -186,7 +233,7 @@ int esSoloLetras(char str[])
     else{
         while(str[i] != '\0')
         {
-            if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')&&(i>51)){
+            if((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')){
                 retorno = 0;
                 break;
             }
@@ -264,18 +311,20 @@ int utn_getCaracter(  char* pCaracter, char* msg,char* msgErr,char letraUno,char
  */
 int esTelefono(char str[])
 {
-   int i=0;
+   int i=0,retorno=1;
    if(str[i] == '\0'){
-        return 0;
+        retorno = 0;
    }else{
         while(str[i] != '\0')
         {
-            if((str[0] != '+') && (str[i] != '-') && (str[i] < '0' || str[i] > '9')&&(i>21))
-                return 0;
+            if((str[0] != '+') && (str[i] != '-') && (str[i] < '0' || str[i] > '9')){
+                retorno=0;
+                break;
+            }
             i++;
         }
    }
-    return 1;
+    return retorno;
 }
 /**
  * \brief Solicita un telefono al usuario y lo devuelve
@@ -289,7 +338,7 @@ int getStringTelefono(char* msg,char* msgErr,char* pBuffer)
     char aux[21];
     int retorno=-1;
     do{
-        getString(msg,aux);
+        getString21(msg,aux);
         if(esTelefono(aux))
         {
             strcpy(pBuffer,aux);
@@ -314,7 +363,7 @@ int esAlfaNumerico(char str[])
    }else{
         while(str[i] != '\0')
         {
-            if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9')&&(i>51))
+            if((str[i]!=' ')&&(str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9'))
                 return 0;
             i++;
         }

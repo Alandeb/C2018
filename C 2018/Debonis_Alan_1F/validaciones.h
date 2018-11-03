@@ -16,4 +16,5 @@ int getStringTelefono(char* msg,char* msgErr,char* pBuffer);
 int esTelefono(char str[]);
 int esAlfaNumerico(char str[]);
 int getStringAlfaNumerico(char* msg,char* msgErr,char* pBuffer);
+int utn_getEnteroEsc(  int* pEntero, char* msg,char* msgErr,int min, int max,int esc);
 #endif // VALIDACIONES_H_INCLUDE
