@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1543262443 source:c:\users\alan_\desktop\tp3-4\controller.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+	"parser.h"
+	"controller.h"
+	"validaciones.h"
+
+1543255920 c:\users\alan_\desktop\tp3-4\linkedlist.h
+
+1543255920 c:\users\alan_\desktop\tp3-4\employee.h
+
+1543255920 c:\users\alan_\desktop\tp3-4\parser.h
+
+1543255920 c:\users\alan_\desktop\tp3-4\controller.h
+
+1543255920 c:\users\alan_\desktop\tp3-4\validaciones.h
+
+1543262289 source:c:\users\alan_\desktop\tp3-4\employee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+	"Employee.h"
+	"validaciones.h"
+
+1543255980 source:c:\users\alan_\desktop\tp3-4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"validaciones.h"
+	"Employee.h"
+	"controller.h"
+
+1543260360 source:c:\users\alan_\desktop\tp3-4\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"validaciones.h"
+	"LinkedList.h"
+	"Employee.h"
+
+1543255920 source:c:\users\alan_\desktop\tp3-4\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	"LinkedList.h"
+	"Employee.h"
+	"validaciones.h"
+
+1543262525 source:c:\users\alan_\desktop\tp3-4\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+	"Employee.h"
+
